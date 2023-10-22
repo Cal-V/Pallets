@@ -6,6 +6,7 @@
   display: flex;
   max-width: 80%;
   margin: auto;
+  padding: 20px;
 }
 
 .color-block {
