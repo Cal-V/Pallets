@@ -1,21 +1,30 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Color from './Color'
 
 function Pallet() {
 
-    const colors = [
-        {backgroundColor:"oklch(80% .4 0)"},
-        {backgroundColor:"oklch(80% .4 60)"},
-        {backgroundColor:"oklch(80% .4 120)"},
-        {backgroundColor:"oklch(80% .4 180)"},
-        {backgroundColor:"oklch(80% .4 240)"},
-        {backgroundColor:"oklch(80% .4 300)"}
-    ]
+  const [count,setCount] = useState(6)
+
+  const colors = [
+      {backgroundColor:"oklch(.5 .1 0)"},
+      {backgroundColor:"oklch(.55 .1 20)"},
+      {backgroundColor:"oklch(.6 .1 40)"},
+      {backgroundColor:"oklch(.65 .1 60)"},
+      {backgroundColor:"oklch(.7 .1 80)"},
+  ]
+
+  const createPallet = (count,type) => {
+    
+  }
 
   return (
-    <div className='pallet'>{colors.map((color,index) => (
-        <Color key={index} color={color} />
-    ))}</div>
+    <div>
+        <input type="number" value={count} onChange={(evt) => {setCount(evt.target.value);createPallet(count)}} />
+        <button>Create Pallet</button>
+        <div className='pallet'>{colors.map((color,index) => (
+            <Color key={index} color={color} />
+        ))}</div>
+    </div>
   )
 }
 

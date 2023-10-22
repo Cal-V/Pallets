@@ -10,6 +10,8 @@
 
 .color-block {
   flex: 1;
-  aspect-ratio: 1/1 !important;
-  max-height: 80px;
+}
+
+.color-block > div {
+  height: 200px;
 }
