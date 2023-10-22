@@ -1,0 +1,15 @@
+.App {
+  text-align: center;
+}
+
+.pallet {
+  display: flex;
+  max-width: 80%;
+  margin: auto;
+}
+
+.color-block {
+  flex: 1;
+  aspect-ratio: 1/1 !important;
+  max-height: 80px;
+}
