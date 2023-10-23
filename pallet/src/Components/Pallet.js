@@ -84,8 +84,9 @@ function Pallet() {
 
   return (
     <div>
-        <input type="number" value={count} onChange={(evt) => {setCount(evt.target.value);createPallet(evt.target.value,palletType)}} />
+        <input type="number" min={3} max={30} value={count} onChange={(evt) => {setCount(evt.target.value);createPallet(evt.target.value,palletType)}} />
         <button onClick={() => createPallet(count,palletType)}>Create Pallet</button>
+        <button onClick={() => createPallet(count,Math.floor(Math.random()*5))}>Random</button>
         <button style={{backgroundColor:`oklch(.5 .1 ${startingHue})`}} onClick={() => createPallet(count,palletType,{L:.3,c:.1,h:startingHue})}>Use this Hue</button>
         <input type="range" value={startingHue} onChange={(evt) => setStartingHue(parseInt(evt.target.value))} min="0" max={360} step={1} />
         <select onChange={(evt) => {setType(parseInt(evt.target.value));createPallet(count,evt.target.value);}}>
