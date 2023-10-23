@@ -1,6 +1,5 @@
 import React, { useRef, useState } from 'react'
 import Color from './Color'
-import { exportComponentAsPNG } from "react-component-export-image";
 
 function Pallet() {
 
@@ -103,7 +102,6 @@ function Pallet() {
         <div ref={palletRef} className='pallet'>{colors.map((color,index) => (
             <Color key={index} color={color} />
         ))}</div>
-        <button onClick={() => exportComponentAsPNG(palletRef)}>Save Pallet</button>
     </div>
   )
 }
