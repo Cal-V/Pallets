@@ -1,7 +1,10 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import Color from './Color'
+import { exportComponentAsPNG } from "react-component-export-image";
 
 function Pallet() {
+
+  const palletRef = useRef()
 
   const [count,setCount] = useState(5)
   const [colors,setColors] = useState([
@@ -30,14 +33,13 @@ function Pallet() {
       hueChange =  hueChange*-1
     const luminanceChange = roundTo((Math.random()*.2+.5)/(count),2)
     let startingColor = (start ? {...start} : {L:roundTo(Math.random()/2,2),c:.1,h:Math.round(Math.random()*360)})
-    let newColor = {...startingColor}
-    console.log(start,newColor)
+    let newColor = {L:startingColor.L,c:startingColor.c,h:startingColor.h}
     let newPallet = [{backgroundColor:`oklch(${startingColor.L} ${startingColor.c} ${startingColor.h})`}]
+    console.log(startingColor.h)
     switch (type) {
       case 0: {
         for (let i = 0; i < added; i++) {
           newColor = {...newColor,L:roundTo(newColor.L+luminanceChange,2),h:roundTo(newColor.h+hueChange,2)}
-          console.log(newColor)
           newPallet = [...newPallet,{backgroundColor:`oklch(${newColor.L} ${newColor.c} ${newColor.h})`}]
         }
         setColors(newPallet)
@@ -71,8 +73,10 @@ function Pallet() {
       }
       case 4: {
         for (let i = 0; i < added; i++) {
-          if (i == Math.round(added/2)-1)
+          if (i == Math.round(added/2)-1){
             newColor = {...newColor,L:roundTo(newColor.L+luminanceChange,2),h:startingColor.h+180}
+            console.log(newColor.h)
+          }
           newColor = {...newColor,L:roundTo(newColor.L+luminanceChange,2),h:roundTo(newColor.h+hueChange,2)}
           newPallet = [...newPallet,{backgroundColor:`oklch(${newColor.L} ${newColor.c} ${newColor.h})`}]
         }
@@ -96,9 +100,10 @@ function Pallet() {
           <option value={3}>Triangle</option>
           <option value={4}>Analogous Complementary</option>
         </select>
-        <div className='pallet'>{colors.map((color,index) => (
+        <div ref={palletRef} className='pallet'>{colors.map((color,index) => (
             <Color key={index} color={color} />
         ))}</div>
+        <button onClick={() => exportComponentAsPNG(palletRef)}>Save Pallet</button>
     </div>
   )
 }
