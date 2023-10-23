@@ -1,7 +1,9 @@
 export const oklchToOklab = (color) => {
-    let newColor = {L:parseFloat(color.l)}
-    newColor.a = color.c*Math.cos(color.h*Math.PI/180 )
-    newColor.b = color.c*Math.sin(color.h*Math.PI/180 )
+    let L = parseFloat(color.l)
+    let a = parseFloat(color.c)*Math.cos(parseFloat(color.h)*Math.PI/180 )
+    let b = parseFloat(color.c)*Math.sin(parseFloat(color.h)*Math.PI/180 )
+    const newColor = {L,a,b}
+    console.log(color,newColor)
     return newColor
 }
 
